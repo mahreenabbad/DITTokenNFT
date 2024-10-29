@@ -7,8 +7,8 @@ var ethers = require('ethers')
 // Contract addresses
 const ABI_FILE1 = '../../artifacts/contracts/DITToken.sol/DITToken.json';
 const ABI_FILE2= '../../artifacts/contracts/DegreeIssuance.sol/DegreeIssuance.json';
- const CONTRACT_ADDRESS_DIT = "0x677C5a4ba14F5Ec512106E905D008B73b2d5dcb5";
- const CONTRACT_ADDRESS_DegreeIssuance = "0x28A8B59A41DeDBa6C9C9c44e721dB139E50bb4b8";
+ const CONTRACT_ADDRESS_DIT = "";
+ const CONTRACT_ADDRESS_DegreeIssuance = "";
 
 // async function getAbi(){
 //   const data = await fsPromises.readFile(ABI_FILE_PATH)

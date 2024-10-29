@@ -1,5 +1,5 @@
 // SPDX-License-Identifier: MIT
-pragma solidity ^0.8.20;
+pragma solidity ^0.8.19;
 
 import "@openzeppelin/contracts/token/ERC20/utils/SafeERC20.sol";
 import "@openzeppelin/contracts/token/ERC721/ERC721.sol";
@@ -7,12 +7,11 @@ import "@openzeppelin/contracts/token/ERC721/extensions/ERC721URIStorage.sol";
 
 contract DegreeIssuance is ERC721, ERC721URIStorage  {
        using SafeERC20 for IERC20;
-
+       
 
         address public owner;
         IERC20 public DITToken;
-        uint256 public DITPrice = 2e16 wei;
-
+        uint256 public DITPrice = 1e18 wei;//1 ether
         uint256 public nftCount;
       
         modifier onlyOwner() {
@@ -23,7 +22,7 @@ contract DegreeIssuance is ERC721, ERC721URIStorage  {
         mapping (address=> uint) public tokenHolder;
         mapping (uint => address) public nftMinted;
 
-        event TokenBought(address buyer, uint tokenPrice, uint tokenQuantity);
+        event TokenBought(address buyer, uint tokenQuantity);
         event NftMinted(address to, uint tokenId);
 
 
@@ -32,13 +31,15 @@ contract DegreeIssuance is ERC721, ERC721URIStorage  {
             owner = msg.sender;
        }
 
-        function buyToken(uint _tokenPrice, uint _tokenQuantity) public payable {
-        require(_tokenPrice >= _tokenQuantity * DITPrice," Insufficient amount");
+        function buyToken( uint _tokenQuantity) public payable {
+        require(msg.value >= _tokenQuantity * DITPrice," Insufficient amount");//10 token price = 10 *2e16 =
         require(_tokenQuantity >0, "Insufficient quatity of token");
+        uint256 contractTokenBalance = DITToken.balanceOf(address(this));
+        require(contractTokenBalance >= _tokenQuantity, "Not enough tokens in contract");
          DITToken.safeTransfer(msg.sender, _tokenQuantity);
          tokenHolder[msg.sender] += _tokenQuantity;
 
-         emit TokenBought(msg.sender, _tokenPrice, _tokenQuantity);
+         emit TokenBought(msg.sender, _tokenQuantity);
        }
 
        function certificateMint(address _to, string memory _tokenUri) external  {
@@ -53,6 +54,10 @@ contract DegreeIssuance is ERC721, ERC721URIStorage  {
         emit NftMinted(_to, newNFTCount);
 
        }
+       function checkContractBalance() public view returns (uint256) {
+        return DITToken.balanceOf(address(this));
+       }
+       
 
         function tokenURI(uint256 tokenId)
         public
