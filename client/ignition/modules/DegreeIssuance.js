@@ -2,7 +2,7 @@
 const { buildModule } = require("@nomicfoundation/hardhat-ignition/modules");
  
 
-const DITContract = "0x677C5a4ba14F5Ec512106E905D008B73b2d5dcb5"
+const DITContract = "0x8DFac0548ff9605a6069ba7Aa0A348b0c74C5675"
 
 
 module.exports = buildModule("DegreeIssuanceModule", (m) => {
@@ -11,4 +11,3 @@ module.exports = buildModule("DegreeIssuanceModule", (m) => {
 
   return { ditToken };
 });
-//DegreeIssuance 0x28A8B59A41DeDBa6C9C9c44e721dB139E50bb4b8
