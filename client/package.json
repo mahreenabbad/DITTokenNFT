@@ -1,12 +1,14 @@
 {
   "name": "-",
-  "private": true,
   "version": "0.0.0",
+  "main": "index.js",
+  
   "scripts": {
     "dev": "vite",
     "build": "vite build",
     "lint": "eslint .",
     "preview": "vite preview"
+    
   },
   "dependencies": {
     "@openzeppelin/contracts": "^5.1.0",
@@ -36,7 +38,7 @@
     "eslint-plugin-react": "^7.37.1",
     "eslint-plugin-react-hooks": "^5.0.0",
     "eslint-plugin-react-refresh": "^0.4.13",
-    "ethers": "^6.13.4",
+    "ethers": "^5.7.2",
     "globals": "^15.11.0",
     "hardhat": "^2.22.15",
     "hardhat-gas-reporter": "^1.0.8",
